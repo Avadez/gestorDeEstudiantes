@@ -223,6 +223,10 @@ updateList.addEventListener("click", () => {
     });
   }
 
+  /*
+    creando modificador de color para estado del aprobado con buenas notas, 
+    aprobado con notas decentes y re-probados
+  */
   for (let index = 0; statusButons.length; index++) {
     // let student = buscadorPorId(statusButons[index].id);
     /*
