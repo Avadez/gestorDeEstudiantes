@@ -1,5 +1,6 @@
 const alumnos = [];
 /*
+
 gesEst.creator(alumnos, "pepito", "alexander", "gonzales", "suarez");
 gesEst.creator(alumnos, "pedrito", "marcos", "gonzales", "suarez");
 
@@ -24,6 +25,7 @@ gesEst.promediar(alumnos);
 console.log(alumnos);
 //console.log(alumnos);
 */
+let estadoDeDespliegue = "no";
 const crearNuevoUsuario = `
     <!--se solicita el nombre-->
     <label>Nombre</label>
@@ -46,8 +48,9 @@ const crearNuevoUsuario = `
     `;
 //formulario de creacion de estudiante
 const desplegarCreacion = $("desplegarCreacion");
-let estadoDeDespliegue = "no";
 const formulario = $("formulario");
+const updateList = $("updateList");
+const tablaDeAlumnos = $("tablaDeAlumnos");
 
 const desplegar = () => {
   if (estadoDeDespliegue == "no") {
@@ -76,5 +79,36 @@ const desplegar = () => {
     return "ya no esta desplegado";
   }
 };
+
+updateList.addEventListener("click", () => {
+  let tablaDeAlumnado = `
+  <tr>
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>Segundo Nombre</th>
+    <th>Apellido</th>
+    <th>Segundo Apellido</th>
+    <th>Estado</th>
+    <th>Anotaciones</th>
+  </tr>
+  `;
+  for (let index = 0; index < alumnos.length; index++) {
+    tablaDeAlumnado += `
+    <tr>
+      <th>${alumnos[index].id}</th>
+      <th>${alumnos[index].nombre}</th>
+      <th>${alumnos[index].segundoNombre}</th>
+      <th>${alumnos[index].apellido}</th>
+      <th>${alumnos[index].segundoApellido}</th>
+      <th>${alumnos[index].calificaciones.estado}</th>
+      <th>${
+        alumnos[index].anotaciones.positivas.length +
+        alumnos[index].anotaciones.negativas.length
+      }</th>
+    </tr>
+    `;
+  }
+  tablaDeAlumnos.innerHTML = tablaDeAlumnado;
+});
 
 desplegarCreacion.addEventListener("click", desplegar);
