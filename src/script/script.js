@@ -105,6 +105,7 @@ updateList.addEventListener("click", () => {
     <th>Anotaciones</th>
   </tr>
   `;
+  let statusButons = [];
   for (let index = 0; index < alumnos.length; index++) {
     tablaDeAlumnado += `
     <tr>
@@ -113,15 +114,25 @@ updateList.addEventListener("click", () => {
       <th>${alumnos[index].segundoNombre}</th>
       <th>${alumnos[index].apellido}</th>
       <th>${alumnos[index].segundoApellido}</th>
-      <th>${alumnos[index].calificaciones.estado}</th>
+      <th><input type="button" value="${
+        alumnos[index].calificaciones.estado
+      }" id="estadoId${alumnos[index].id}" class="statusButon"></th>
       <th>${
         alumnos[index].anotaciones.positivas.length +
         alumnos[index].anotaciones.negativas.length
       }</th>
     </tr>
     `;
+    //statusButons.push($(`estadoId${alumnos[index].id}`));
   }
+
   tablaDeAlumnos.innerHTML = tablaDeAlumnado;
+
+  for (let index = 0; index < alumnos.length; index++) {
+    statusButons.push($(`estadoId${alumnos[index].id}`));
+  }
+
+  console.log(statusButons);
 });
 
 desplegarCreacion.addEventListener("click", desplegar);

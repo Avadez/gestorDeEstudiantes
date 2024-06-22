@@ -14,7 +14,7 @@ class Estudiante {
     this.calificaciones = {
       calif: [],
       promedio: 0,
-      estado: "",
+      estado: "unknown",
     };
     this.anotaciones = {
       positivas: [],
