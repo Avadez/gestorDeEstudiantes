@@ -9,6 +9,9 @@ table{
   border-collapse: collapse;
     width: 100%;
 }
+.encabezadoDeTabla{
+  background: rgb(190, 145, 20);
+}
 th, td {
   border: 1px solid #ddd;
   padding: 8px;
@@ -29,4 +32,30 @@ th{
 }
 .calificacionIndiNeg{
   background: rgb(179, 26, 26);
+}
+/*
+.numeroDeEntradaPositiva{}
+.contenidoDeLaEntradaPositiva{}
+.numeroDeEntradaNegativa{}
+.contenidoDeLaEntradaNegativa{}
+
+*/
+.condecoracion{
+  background: rgb(59, 112, 54);
+}
+.reporteDePataneria{
+  background: rgb(124, 59, 59);
+}
+.textoCond{
+  height: 200px;
+  width: 200px;
+  resize: none;
+}
+.textoSans{
+  height: 200px;
+  width: 200px;
+  resize: none;
+}
+.marron{
+  background: rgb(59, 41, 29);
 }
