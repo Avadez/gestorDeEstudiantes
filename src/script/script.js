@@ -38,7 +38,14 @@ gesEst.creator(alumnos, "Natalia", "María", "Castro", "Ruiz");
 
 // terminando de crear alumnos de ejemplo
 
+//Declaro las funciones que ocupo en el codigo
+
 let estadoDeDespliegue = "no";
+/*
+Guardo el formulario en una variable 
+para ponerlo y quitarlo cuando 
+sea necesario
+*/
 const crearNuevoUsuario = `
     <!--se solicita el nombre-->
     <label>Nombre</label>
@@ -65,6 +72,7 @@ const formulario = $("formulario");
 const updateList = $("updateList");
 const tablaDeAlumnos = $("tablaDeAlumnos");
 
+//creo la funcion que desplegara el formulario de creacion de alumno
 const desplegar = () => {
   if (estadoDeDespliegue == "no") {
     formulario.innerHTML = crearNuevoUsuario;
@@ -93,6 +101,12 @@ const desplegar = () => {
   }
 };
 
+/* 
+se que en el siguiente evento estoy abusando del for y que 
+es mala practica hacerlo tanto, aqui va el evento updateList que
+se encargara de actualizar la lista de estudiantes 
+en pantalla con ayuda de un boton
+*/
 updateList.addEventListener("click", () => {
   let tablaDeAlumnado = `
   <tr>
@@ -106,6 +120,10 @@ updateList.addEventListener("click", () => {
   </tr>
   `;
   let statusButons = [];
+  /*
+    Rellendo varias filas de una tabla para 
+    imprimir en pantalla los alumnos y agrego ID's para manejarlos mas tarde
+  */
   for (let index = 0; index < alumnos.length; index++) {
     tablaDeAlumnado += `
     <tr>
@@ -116,23 +134,36 @@ updateList.addEventListener("click", () => {
       <th>${alumnos[index].segundoApellido}</th>
       <th><input type="button" value="${
         alumnos[index].calificaciones.estado
-      }" id="estadoId${alumnos[index].id}" class="statusButon"></th>
+      }" id="estadoId${alumnos[index].id}" title="Agregar nota a ${
+      alumnos[index].nombre
+    }?" class="statusButon"></th>
       <th>${
         alumnos[index].anotaciones.positivas.length +
         alumnos[index].anotaciones.negativas.length
       }</th>
     </tr>
     `;
-    //statusButons.push($(`estadoId${alumnos[index].id}`));
   }
-
   tablaDeAlumnos.innerHTML = tablaDeAlumnado;
 
+  /*
+  guardo cada boton de la tabla alumnado en objeto 
+  dentro del array statusButons, para que? pues ya veran, pero 
+  hace falta para mejor identificacion de cada boton
+  */
   for (let index = 0; index < alumnos.length; index++) {
-    statusButons.push($(`estadoId${alumnos[index].id}`));
+    let a = {
+      id: index,
+      elemnt: $(`estadoId${alumnos[index].id}`),
+    };
+    statusButons.push(a);
   }
 
   console.log(statusButons);
 });
 
+/*
+aqui esta el boton que ayuda a la funcion 
+desplegar, el desplegar el formulario
+*/
 desplegarCreacion.addEventListener("click", desplegar);

@@ -1,5 +1,9 @@
 // herramienta de gestor de estudiantes
 const gesEst = {
+  /*
+  una funcion para crear estudiantes con 
+  la clase "Estudiante" y meterlo en el array de preferencia
+  */
   creator: (array, nombre, segundoNombre, apellido, segundoApellido) => {
     let id = array.length;
     let estudiante = new Estudiante(
@@ -11,6 +15,7 @@ const gesEst = {
     );
     array.push(estudiante);
   },
+  // una funcion para agregar una nota a un estudiantes
   agregarNota: (array, id, calificacion) => {
     let x = 0;
     for (x; x < array.length; x++) {
@@ -19,6 +24,10 @@ const gesEst = {
       }
     }
   },
+  /*
+  esta funcion es para actualizar el promedio y actualizar 
+  el estado de un estudiante, si esta aprobado o reprobado
+  */
   promediar: (array) => {
     let x = 0;
     for (x; x < array.length; x++) {
@@ -41,6 +50,10 @@ const gesEst = {
       }
     }
   },
+  /*
+  ayuda a añadir facilmente una anotacion 
+  ya sea positiva o negativa a un estudiante
+  */
   anadirAnotacion: (array, id, anotacion, tipo) => {
     let x = 0;
     for (x; x < array.length; x++) {
@@ -55,6 +68,11 @@ const gesEst = {
     }
   },
 };
+
+/*
+una funcion corriente que me ayuda como programador a 
+seleccionar un elemento por su ID
+*/
 const $ = (id) => {
   return document.getElementById(id);
 };

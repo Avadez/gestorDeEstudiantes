@@ -1,3 +1,7 @@
+/*
+una clase corriente que me permite Construir facilmente objetos 
+estudiante solo con unas pocas propiedades
+*/
 class Estudiante {
   constructor(
     ID = 0,
