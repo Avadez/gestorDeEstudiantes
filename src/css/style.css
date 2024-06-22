@@ -14,10 +14,19 @@ th, td {
   padding: 8px;
   text-align: left;
 }
-/*
-.statusButon{
-  background: rgb(53, 132, 156);
-  width: max-content;
-  height: max-content;
+th{
+  background: rgb(160, 90, 90);
 }
-*/
+
+.statusButon:hover{
+  background: rgb(53, 132, 156);
+}
+.calificacionIndiPos{
+  background: rgb(90, 160, 111);
+}
+.calificacionIndiNeu{
+  background: rgb(160, 121, 90);
+}
+.calificacionIndiNeg{
+  background: rgb(185, 72, 72);
+}

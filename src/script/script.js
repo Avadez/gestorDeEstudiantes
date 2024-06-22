@@ -38,13 +38,13 @@ gesEst.creator(alumnos, "Natalia", "María", "Castro", "Ruiz");
 
 // terminando de crear alumnos de ejemplo
 
-//Declaro las funciones que ocupo en el codigo
+// Declaro las funciones que ocupo en el codigo
 
 let estadoDeDespliegue = "no";
 /*
-Guardo el formulario en una variable 
-para ponerlo y quitarlo cuando 
-sea necesario
+  Guardo el formulario en una variable 
+  para ponerlo y quitarlo cuando 
+  sea necesario
 */
 const crearNuevoUsuario = `
     <!--se solicita el nombre-->
@@ -66,13 +66,14 @@ const crearNuevoUsuario = `
     <!--se ejecuta la creacion del alumno-->
     <input type="button" value="Crear Estudiante" id="crear" />
     `;
-//formulario de creacion de estudiante
+// formulario de creacion de estudiante
 const desplegarCreacion = $("desplegarCreacion");
 const formulario = $("formulario");
 const updateList = $("updateList");
 const tablaDeAlumnos = $("tablaDeAlumnos");
+const agregarNota = $("agregarNota");
 
-//creo la funcion que desplegara el formulario de creacion de alumno
+// creo la funcion que desplegara el formulario de creacion de alumno
 const desplegar = () => {
   if (estadoDeDespliegue == "no") {
     formulario.innerHTML = crearNuevoUsuario;
@@ -101,11 +102,20 @@ const desplegar = () => {
   }
 };
 
+//funcion para buscar toda la informacion por medio de un ID
+const buscadorPorId = (id) => {
+  for (let index = 0; index < alumnos.length; index++) {
+    if (alumnos[index].id == id) {
+      return alumnos[index];
+    }
+  }
+};
+
 /* 
-se que en el siguiente evento estoy abusando del for y que 
-es mala practica hacerlo tanto, aqui va el evento updateList que
-se encargara de actualizar la lista de estudiantes 
-en pantalla con ayuda de un boton
+  se que en el siguiente evento estoy abusando del for y que 
+  es mala practica hacerlo tanto, aqui va el evento updateList que
+  se encargara de actualizar la lista de estudiantes 
+  en pantalla con ayuda de un boton
 */
 updateList.addEventListener("click", () => {
   let tablaDeAlumnado = `
@@ -122,7 +132,8 @@ updateList.addEventListener("click", () => {
   let statusButons = [];
   /*
     Rellendo varias filas de una tabla para 
-    imprimir en pantalla los alumnos y agrego ID's para manejarlos mas tarde
+    imprimir en pantalla los alumnos y agrego ID's 
+    para manejarlos mas tarde
   */
   for (let index = 0; index < alumnos.length; index++) {
     tablaDeAlumnado += `
@@ -132,11 +143,9 @@ updateList.addEventListener("click", () => {
       <th>${alumnos[index].segundoNombre}</th>
       <th>${alumnos[index].apellido}</th>
       <th>${alumnos[index].segundoApellido}</th>
-      <th><input type="button" value="${
-        alumnos[index].calificaciones.estado
-      }" id="estadoId${alumnos[index].id}" title="Agregar nota a ${
+      <th id="estadoId${alumnos[index].id}" title="Agregar nota a ${
       alumnos[index].nombre
-    }?" class="statusButon"></th>
+    }?" class="statusButon">${alumnos[index].calificaciones.estado}</th>
       <th>${
         alumnos[index].anotaciones.positivas.length +
         alumnos[index].anotaciones.negativas.length
@@ -147,23 +156,78 @@ updateList.addEventListener("click", () => {
   tablaDeAlumnos.innerHTML = tablaDeAlumnado;
 
   /*
-  guardo cada boton de la tabla alumnado en objeto 
-  dentro del array statusButons, para que? pues ya veran, pero 
-  hace falta para mejor identificacion de cada boton
+    guardo cada boton de la tabla alumnado en objeto 
+    dentro del array statusButons, para que? pues ya veran, pero 
+    hace falta para mejor identificacion de cada boton
   */
   for (let index = 0; index < alumnos.length; index++) {
     let a = {
       id: index,
-      elemnt: $(`estadoId${alumnos[index].id}`),
+      element: $(`estadoId${alumnos[index].id}`),
     };
     statusButons.push(a);
   }
 
-  console.log(statusButons);
+  // creo un sistema de calificaciones
+  for (let a = 0; a < statusButons.length; a++) {
+    statusButons[a].element.addEventListener("click", () => {
+      let student = buscadorPorId(statusButons[a].id);
+
+      let formNota = `
+      <p>
+          Que nota desea agregar a
+          ${student.nombre} ${student.apellido}?
+      </p>
+      <input type="number" id="calificacion${student.id}" placeholder="1.0-7.0" />
+      <input type="button" value="calificar" id="calificar${student.id}"> <br/>
+      <input type="button" value="cancelar" id="cancelar${student.id}"> <input type="button" value="mostrar calificaciones" id="mosCalif${student.id}"> <br/>
+      <div id="dispensarCalifs${student.id}"></div>
+      `;
+      agregarNota.innerHTML = formNota;
+
+      let entradaNota = $(`calificacion${student.id}`);
+      let calificar = $(`calificar${student.id}`);
+      let cancelar = $(`cancelar${student.id}`);
+      let mosCalif = $(`mosCalif${student.id}`);
+      let dispensarCalifs = $(`dispensarCalifs${student.id}`);
+      let califs = ``;
+
+      calificar.addEventListener("click", () => {
+        gesEst.agregarNota(alumnos, student.id, parseFloat(entradaNota.value));
+        gesEst.promediar(alumnos);
+      });
+      mosCalif.addEventListener("click", () => {
+        for (
+          let index = 0;
+          index < student.calificaciones.calif.length;
+          index++
+        ) {
+          if (student.calificaciones.calif[index] >= 6) {
+            califs += `<span class="calificacionIndiPos">Nota ${index}: ${student.calificaciones.calif[index]},</span>`;
+          }
+          if (
+            student.calificaciones.calif[index] < 6 &&
+            student.calificaciones.calif[index] > 4.9
+          ) {
+            califs += `<span class="calificacionIndiNeu">Nota ${index}: ${student.calificaciones.calif[index]},</span>`;
+          }
+          if (student.calificaciones.calif[index] < 5) {
+            califs += `<span class="calificacionIndiNeg">Nota ${index}: ${student.calificaciones.calif[index]},</span>`;
+          }
+        }
+        dispensarCalifs.innerHTML = califs;
+      });
+      cancelar.addEventListener("click", () => {
+        agregarNota.innerHTML = "";
+      });
+    });
+  }
+
+  // console.log(statusButons);
 });
 
 /*
-aqui esta el boton que ayuda a la funcion 
-desplegar, el desplegar el formulario
+  aqui esta el boton que ayuda a la funcion 
+  desplegar, el desplegar el formulario
 */
 desplegarCreacion.addEventListener("click", desplegar);
