@@ -72,23 +72,32 @@ const formulario = $("formulario");
 const updateList = $("updateList");
 const tablaDeAlumnos = $("tablaDeAlumnos");
 const agregarNota = $("agregarNota");
+let colorPrede = {
+  default: "rgb(53, 132, 156)",
+  negativo: "rgb(179, 26, 26)",
+  neutro: "rgb(143, 89, 46)",
+  positivo: "rgb(42, 128, 67)",
+};
 
 // creo la funcion que desplegara el formulario de creacion de alumno
 const desplegar = () => {
   if (estadoDeDespliegue == "no") {
     formulario.innerHTML = crearNuevoUsuario;
-    let crear = $("crear");
-    let nombre = $("nombre");
-    let segundoNombre = $("segundoNombre");
-    let apellido = $("apellido");
-    let segundoApellido = $("segundoApellido");
-    crear.addEventListener("click", () => {
+    let menuDeCreacion = {
+      crear: $("crear"),
+      nombre: $("nombre"),
+      segundoNombre: $("segundoNombre"),
+      apellido: $("apellido"),
+      segundoApellido: $("segundoApellido"),
+    };
+
+    menuDeCreacion.crear.addEventListener("click", () => {
       gesEst.creator(
         alumnos,
-        nombre.value,
-        segundoNombre.value,
-        apellido.value,
-        segundoApellido.value
+        menuDeCreacion.nombre.value,
+        menuDeCreacion.segundoNombre.value,
+        menuDeCreacion.apellido.value,
+        menuDeCreacion.segundoApellido.value
       );
       console.log(alumnos);
     });
@@ -238,12 +247,13 @@ updateList.addEventListener("click", () => {
     if (buscadorPorId(statusButons[index].id).calificaciones.promedio < 5) {
       // aqui el bloque de codigo negativo
       //console.log(statusButons[index].element);
-      statusButons[index].element.style.backgroundColor = "rgb(185, 72, 72)";
+      statusButons[index].element.style.backgroundColor = colorPrede.negativo;
+      // eventos de manejo de color re-probados
       statusButons[index].element.addEventListener("mouseenter", () => {
-        statusButons[index].element.style.backgroundColor = "rgb(53, 132, 156)";
+        statusButons[index].element.style.backgroundColor = colorPrede.default;
       });
       statusButons[index].element.addEventListener("mouseleave", () => {
-        statusButons[index].element.style.backgroundColor = "rgb(185, 72, 72)";
+        statusButons[index].element.style.backgroundColor = colorPrede.negativo;
       });
     }
     if (
@@ -252,23 +262,25 @@ updateList.addEventListener("click", () => {
     ) {
       // aqui el bloque de codigo neutral
       //console.log(statusButons[index].element);
-      statusButons[index].element.style.backgroundColor = "rgb(160, 121, 90)";
+      statusButons[index].element.style.backgroundColor = colorPrede.neutro;
+      // eventos de manejo de color aprobados por poco
       statusButons[index].element.addEventListener("mouseenter", () => {
-        statusButons[index].element.style.backgroundColor = "rgb(53, 132, 156)";
+        statusButons[index].element.style.backgroundColor = colorPrede.default;
       });
       statusButons[index].element.addEventListener("mouseleave", () => {
-        statusButons[index].element.style.backgroundColor = "rgb(160, 121, 90)";
+        statusButons[index].element.style.backgroundColor = colorPrede.neutro;
       });
     }
     if (buscadorPorId(statusButons[index].id).calificaciones.promedio > 5.9) {
       // aqui el bloque de codigo positivo
       //console.log(statusButons[index].element);
-      statusButons[index].element.style.backgroundColor = "rgb(90, 160, 111)";
+      statusButons[index].element.style.backgroundColor = colorPrede.positivo;
+      // eventos de manejo de color aprobados
       statusButons[index].element.addEventListener("mouseenter", () => {
-        statusButons[index].element.style.backgroundColor = "rgb(53, 132, 156)";
+        statusButons[index].element.style.backgroundColor = colorPrede.default;
       });
       statusButons[index].element.addEventListener("mouseleave", () => {
-        statusButons[index].element.style.backgroundColor = "rgb(90, 160, 111)";
+        statusButons[index].element.style.backgroundColor = colorPrede.positivo;
       });
     }
   }
