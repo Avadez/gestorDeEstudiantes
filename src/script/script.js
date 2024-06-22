@@ -145,7 +145,7 @@ updateList.addEventListener("click", () => {
       <th>${alumnos[index].segundoApellido}</th>
       <th id="estadoId${alumnos[index].id}" title="Agregar nota a ${
       alumnos[index].nombre
-    }?" class="statusButon">${alumnos[index].calificaciones.estado}</th>
+    }?" class="statusButon" >${alumnos[index].calificaciones.estado}</th>
       <th>${
         alumnos[index].anotaciones.positivas.length +
         alumnos[index].anotaciones.negativas.length
@@ -223,7 +223,52 @@ updateList.addEventListener("click", () => {
     });
   }
 
-  // console.log(statusButons);
+  for (let index = 0; statusButons.length; index++) {
+    // let student = buscadorPorId(statusButons[index].id);
+    /*
+    console.log(
+      buscadorPorId(statusButons[index].id).calificaciones.promedio < 5
+    );
+    */
+
+    if (buscadorPorId(statusButons[index].id).calificaciones.promedio < 5) {
+      // aqui el bloque de codigo negativo
+      //console.log(statusButons[index].element);
+      statusButons[index].element.style.backgroundColor = "rgb(185, 72, 72)";
+      statusButons[index].element.addEventListener("mouseenter", () => {
+        statusButons[index].element.style.backgroundColor = "rgb(53, 132, 156)";
+      });
+      statusButons[index].element.addEventListener("mouseleave", () => {
+        statusButons[index].element.style.backgroundColor = "rgb(185, 72, 72)";
+      });
+    }
+    if (
+      buscadorPorId(statusButons[index].id).calificaciones.promedio > 4.9 &&
+      buscadorPorId(statusButons[index].id).calificaciones.promedio < 6
+    ) {
+      // aqui el bloque de codigo neutral
+      //console.log(statusButons[index].element);
+      statusButons[index].element.style.backgroundColor = "rgb(160, 121, 90)";
+      statusButons[index].element.addEventListener("mouseenter", () => {
+        statusButons[index].element.style.backgroundColor = "rgb(53, 132, 156)";
+      });
+      statusButons[index].element.addEventListener("mouseleave", () => {
+        statusButons[index].element.style.backgroundColor = "rgb(160, 121, 90)";
+      });
+    }
+    if (buscadorPorId(statusButons[index].id).calificaciones.promedio > 5.9) {
+      // aqui el bloque de codigo positivo
+      //console.log(statusButons[index].element);
+      statusButons[index].element.style.backgroundColor = "rgb(90, 160, 111)";
+      statusButons[index].element.addEventListener("mouseenter", () => {
+        statusButons[index].element.style.backgroundColor = "rgb(53, 132, 156)";
+      });
+      statusButons[index].element.addEventListener("mouseleave", () => {
+        statusButons[index].element.style.backgroundColor = "rgb(90, 160, 111)";
+      });
+    }
+  }
+  console.log(statusButons);
 });
 
 /*

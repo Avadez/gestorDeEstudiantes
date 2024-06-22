@@ -25,12 +25,12 @@ Maqueta de gestor de estudiantes temporal maquetado para Mision del Curso Javasc
     - positivas
     - negativas
   - Sistema de puntaje []
-  - Mostrar Estudiante con mejores calificaciones []
-  - Mostrar Estudiante con calificaciones decentes []
-  - Mostrar Estudiante con peores calificaciones []
-  - Mostrar estudiantes aprobados []
-  - Mostrar estudiantes re-probados []
-  - Mostrar el mejor promedio []
+  - Mostrar Estudiante con mejores calificaciones [*]
+  - Mostrar Estudiante con calificaciones decentes [*]
+  - Mostrar Estudiante con peores calificaciones [*]
+  - Mostrar estudiantes aprobados [*]
+  - Mostrar estudiantes re-probados [*]
+  - Mostrar el mejor promedio [*]
   - Mostrar el estudiante con mas anotaciones []
     - Positivas
     - Negativas
