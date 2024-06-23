@@ -53,3 +53,14 @@ Lo que te proponemos es que puedas crear un objeto Curso, por ejemplo, el cual e
 Recuerda que la temática es libre, puedes llevar el ejemplo aplicado a una empresa de productos y calcular el precio total dado el stock, o bien, una casa de arriendos de películas que muestre la mejor película dado el puntaje de cada una.
 
 **_Comparte tu proyecto abriendo un debate en este foro. Otras personas participantes y tutores podrían darte feedback sobre tu misión, y también te invitamos a comentar lo que otros suben, siempre con respeto y opiniones constructivas, que nos ayuden a mejorar._**
+
+**Creditos:**
+
+- Diseño:
+  - Armando Zuñiga
+- Programacion:
+  - Armando Zuñiga
+- Testeo y Demo:
+  - Armando Zuñiga
+- Documentacion:
+  - Armando Zuñiga
