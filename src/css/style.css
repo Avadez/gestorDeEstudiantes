@@ -33,13 +33,28 @@ th{
 .calificacionIndiNeg{
   background: rgb(179, 26, 26);
 }
-/*
-.numeroDeEntradaPositiva{}
-.contenidoDeLaEntradaPositiva{}
-.numeroDeEntradaNegativa{}
-.contenidoDeLaEntradaNegativa{}
 
-*/
+.numeroDeEntradaPositiva{
+  background: rgb(42, 128, 67);
+  width: 60px;
+  height: 100px;
+}
+.contenidoDeLaEntradaPositiva{
+  background: rgb(42, 128, 67);
+  width: auto;
+  height: auto;
+}
+.numeroDeEntradaNegativa{
+  background: rgb(128, 42, 42);
+  width: 60px;
+  height: 100px;
+}
+.contenidoDeLaEntradaNegativa{
+  background: rgb(128, 42, 42);
+  width: auto;
+  height: auto;
+}
+
 .condecoracion{
   background: rgb(59, 112, 54);
 }

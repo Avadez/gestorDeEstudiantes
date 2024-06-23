@@ -148,7 +148,9 @@ document.addEventListener("DOMContentLoaded", () => {
           <th id="estadoId${alumnos[index].id}" title="Agregar nota a ${
         alumnos[index].nombre
       }?" class="statusButon" >${alumnos[index].calificaciones.estado}</th>
-          <th id="anotaciones${alumnos[index].id}">${
+          <th id="anotaciones${alumnos[index].id}" title="Agregar anotacion a ${
+        alumnos[index].nombre
+      }?">${
         alumnos[index].anotaciones.positivas.length +
         alumnos[index].anotaciones.negativas.length
       }</th>
@@ -249,7 +251,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let formAnotacion = [
           `
-          <label for="tipoDeAnotacion">Que tipo de anotacion desea agregar a <!--inserte nombre-->?</label>
+          <label for="tipoDeAnotacion">Que tipo de anotacion desea agregar a ${student.nombre}?</label>
           <select name="tipoDeAnotacion" id="entradaAnotacion${student.id}">
             <option value="anotacion" selected>anotacion</option>
             <option value="positiva">Positiva</option>
@@ -442,20 +444,56 @@ document.addEventListener("DOMContentLoaded", () => {
         negativas: buscadorPorId(anotacionesButtons[p].id).anotaciones.negativas
           .length,
       };
+      console.log(
+        `tiene mas positivas que negativas?${
+          tempObj.positivas > tempObj.negativas
+        }`
+      );
+      console.log(
+        `tiene menos positivas que negativas?${
+          tempObj.positivas < tempObj.negativas
+        }`
+      );
+      console.log(
+        `tiene la misma cantidad de positivas que negativas?${
+          tempObj.positivas == tempObj.negativas
+        }`
+      );
       if (tempObj.positivas > tempObj.negativas) {
         //
         anotacionesButtons[p].element.style.backgroundColor =
-          "rgb(42, 128, 67)";
+          colorPrede.positivo;
+        anotacionesButtons[p].element.addEventListener("mouseenter", () => {
+          anotacionesButtons[p].element.style.backgroundColor =
+            colorPrede.default;
+        });
+        anotacionesButtons[p].element.addEventListener("mouseleave", () => {
+          anotacionesButtons[p].element.style.backgroundColor =
+            colorPrede.positivo;
+        });
       }
       if (tempObj.positivas < tempObj.negativas) {
-        //
         anotacionesButtons[p].element.style.backgroundColor =
-          "rgb(179, 26, 26)";
+          colorPrede.negativo;
+        anotacionesButtons[p].element.addEventListener("mouseenter", () => {
+          anotacionesButtons[p].element.style.backgroundColor =
+            colorPrede.default;
+        });
+        anotacionesButtons[p].element.addEventListener("mouseleave", () => {
+          anotacionesButtons[p].element.style.backgroundColor =
+            colorPrede.negativo;
+        });
       }
       if (tempObj.positivas == tempObj.negativas) {
-        //
-        anotacionesButtons[p].element.style.backgroundColor =
-          "rgb(143, 89, 46)";
+        anotacionesButtons[p].element.style.backgroundColor = colorPrede.neutro;
+        anotacionesButtons[p].element.addEventListener("mouseenter", () => {
+          anotacionesButtons[p].element.style.backgroundColor =
+            colorPrede.default;
+        });
+        anotacionesButtons[p].element.addEventListener("mouseleave", () => {
+          anotacionesButtons[p].element.style.backgroundColor =
+            colorPrede.neutro;
+        });
       }
     }
   });
